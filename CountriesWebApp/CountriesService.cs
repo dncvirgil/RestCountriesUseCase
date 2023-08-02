@@ -21,7 +21,7 @@ namespace CountriesWebApp
             return countries;
         }
 
-        private IEnumerable<Country> FilterCountries(IEnumerable<Country> countries, string country)
+        private static IEnumerable<Country> FilterCountries(IEnumerable<Country> countries, string country)
         {
             if (string.IsNullOrEmpty(country))
             {
