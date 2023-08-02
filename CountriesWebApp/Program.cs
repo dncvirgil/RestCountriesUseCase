@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IApiClient, ApiClient>();
 
 var app = builder.Build();
 

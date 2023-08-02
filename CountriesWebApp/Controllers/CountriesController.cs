@@ -20,9 +20,8 @@ public class CountriesController : ControllerBase
         string countrySort = null,
         int? page = null)
     {
-        var countries = await _countriesService.GetAllCountriesAsync();
+        var countries = await _countriesService.GetCountriesAsync(country, population, countrySort, page);
 
-        // Filter or modify the countries based on the provided parameters.
         return Ok(countries);
     }
 }
