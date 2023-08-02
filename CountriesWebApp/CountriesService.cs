@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using CountriesWebApp.Model;
+using System.Text.Json;
 
 namespace CountriesWebApp
 {

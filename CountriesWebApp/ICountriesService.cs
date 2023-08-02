@@ -1,4 +1,6 @@
-﻿namespace CountriesWebApp
+﻿using CountriesWebApp.Model;
+
+namespace CountriesWebApp
 {
     public interface ICountriesService
     {
