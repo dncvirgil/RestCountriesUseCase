@@ -1,0 +1,35 @@
+User
+I am working with .net and c#. I need a method for paginacion fo an IEnumerable<Country>.
+Create a function that accepts numbers as an attribute and can limit the number of records.  
+The functionality should accept a number and retrieve first n records (e.g., providing number `15` I should receive 15 first records from API).  
+
+ChatGPT
+Sure! You can create a method that accepts an IEnumerable<Country> and an integer n to return the first n records. You can use the LINQ Take method to achieve this.
+
+Here's a simple example of how you might accomplish this:
+
+csharp
+Copy code
+using System.Collections.Generic;
+using System.Linq;
+
+public class Country
+{
+    public string Name { get; set; }
+    // Other properties
+}
+
+public static class CountryPagination
+{
+    public static IEnumerable<Country> GetFirstNRecords(IEnumerable<Country> countries, int n)
+    {
+        return countries.Take(n);
+    }
+}
+You can then use this method by passing in your IEnumerable<Country> and the number of records you want to retrieve:
+
+csharp
+Copy code
+IEnumerable<Country> allCountries = GetAllCountriesFromApi(); // Your method to get all countries
+IEnumerable<Country> first15Countries = CountryPagination.GetFirstNRecords(allCountries, 15);
+This will give you the first 15 records from the allCountries collection. Make sure to include the System.Linq namespace to enable the use of the Take method.

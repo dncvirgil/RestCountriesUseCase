@@ -14,13 +14,14 @@ namespace CountriesWebApp
             _apiClient = apiClient;
         }
 
-        public async Task<IEnumerable<Country>> GetCountriesAsync(string country, int? population, string countrySort, int? page)
+        public async Task<IEnumerable<Country>> GetCountriesAsync(string country, int? population, string countrySort, int? numberOfRecords)
         {
             var countries = await _apiClient.GetAllCountriesAsync();
             
             countries = FilterCountries(countries, country);
             countries = FilterByPopulation(countries, population);
             countries = SortCountries(countries, countrySort);
+            countries = GetFirstNRecords(countries, numberOfRecords);
 
             return countries;
         }
@@ -52,6 +53,11 @@ namespace CountriesWebApp
 
         private static IEnumerable<Country> SortCountries(IEnumerable<Country> countries, string sortDirection)
         {
+            if (string.IsNullOrEmpty(sortDirection))
+            {
+                return countries;
+            }
+
             if (sortDirection.ToLower() == "ascend")
             {
                 return countries.OrderBy(country => country.Name.Common);
@@ -60,10 +66,18 @@ namespace CountriesWebApp
             {
                 return countries.OrderByDescending(country => country.Name.Common);
             }
-            else
+
+            return countries;
+        }
+
+        private static IEnumerable<Country> GetFirstNRecords(IEnumerable<Country> countries, int? numberOfRecords)
+        {
+            if (!numberOfRecords.HasValue || numberOfRecords.Value <= 0)
             {
                 return countries;
             }
+
+            return countries.Take(numberOfRecords.Value);
         }
     }
 }
