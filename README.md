@@ -16,11 +16,20 @@ Once the application is running, you can access the Swagger UI interface by open
 **Examples of How to Use the Developed Endpoint:**
 
 •	Fetch all countries: GET /api/countries
+
 •	Fetch countries with the name containing "United": GET /api/countries?country=United
+
 •	Fetch countries with a population greater than 100 million: GET /api/countries?population=100
+
 •	Fetch countries sorted by their names in ascending order: GET /api/countries?countrySort=ascend
+
 •	Fetch countries sorted by their population in descending order: GET /api/countries?countrySort=descend
+
 •	Fetch the first 10 countries: GET /api/countries?numberOfRecords=10
+
 •	Fetch countries named "Germany" with a population less than 100 million: GET /api/countries?country=Germany&population=100
+
 •	Fetch the top 5 most populous countries: GET /api/countries?countrySort=descend&numberOfRecords=5
+
 •	Fetch countries with a population less than 1 million, sorted by name in ascending order: GET /api/countries?population=-1&countrySort=asc
+
