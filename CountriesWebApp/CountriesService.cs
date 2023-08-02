@@ -20,6 +20,7 @@ namespace CountriesWebApp
             
             countries = FilterCountries(countries, country);
             countries = FilterByPopulation(countries, population);
+            countries = SortCountries(countries, countrySort);
 
             return countries;
         }
@@ -39,7 +40,7 @@ namespace CountriesWebApp
             return filteredCountries;
         }
 
-        public static IEnumerable<Country> FilterByPopulation(IEnumerable<Country> countries, int? millions)
+        private static IEnumerable<Country> FilterByPopulation(IEnumerable<Country> countries, int? millions)
         {
             if (!millions.HasValue)
             {
@@ -47,6 +48,22 @@ namespace CountriesWebApp
             }
 
             return countries.Where(c => c.Population < millions.Value * 1000000);
+        }
+
+        private static IEnumerable<Country> SortCountries(IEnumerable<Country> countries, string sortDirection)
+        {
+            if (sortDirection.ToLower() == "ascend")
+            {
+                return countries.OrderBy(country => country.Name.Common);
+            }
+            else if (sortDirection.ToLower() == "descend")
+            {
+                return countries.OrderByDescending(country => country.Name.Common);
+            }
+            else
+            {
+                return countries;
+            }
         }
     }
 }
