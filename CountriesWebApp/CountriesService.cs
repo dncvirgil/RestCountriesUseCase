@@ -29,10 +29,7 @@ namespace CountriesWebApp
                     PropertyNameCaseInsensitive = true
                 })!;
             }
-            else
-            {
-                throw new Exception("Failed to fetch countries");
-            }
+            return Enumerable.Empty<Country>();
         }
     }
 }
