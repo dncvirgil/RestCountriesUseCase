@@ -1,4 +1,5 @@
 ﻿using CountriesWebApp.Model;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text.Json;
 
@@ -18,6 +19,8 @@ namespace CountriesWebApp
             var countries = await _apiClient.GetAllCountriesAsync();
             
             countries = FilterCountries(countries, country);
+            countries = FilterByPopulation(countries, population);
+
             return countries;
         }
 
@@ -34,6 +37,16 @@ namespace CountriesWebApp
             );
 
             return filteredCountries;
+        }
+
+        public static IEnumerable<Country> FilterByPopulation(IEnumerable<Country> countries, int? millions)
+        {
+            if (!millions.HasValue)
+            {
+                return countries;
+            }
+
+            return countries.Where(c => c.Population < millions.Value * 1000000);
         }
     }
 }

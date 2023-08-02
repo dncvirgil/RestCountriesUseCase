@@ -1,0 +1,45 @@
+User
+I am working with .net and c#. I need a method to filter an IEnumerable<Country> based on country population. The model for country is:
+public class Country
+{
+    public int Population { get; set; }
+}
+
+The filter must use Population property. 
+The filter should search for countries where the population is less than provided number from attributes in the millions of people (e.g., by providing value `10`, I should find countries with a population less than 10m) 
+
+ChatGPT
+Sure! You can filter an IEnumerable<Country> based on the population by using a LINQ query. You'll want to multiply the provided value by one million since the requirement is to filter in terms of millions of people.
+
+Here's a method that takes an IEnumerable<Country> and an integer, and returns an IEnumerable<Country> with the countries that have a population less than the provided number in millions:
+
+csharp
+Copy code
+using System.Collections.Generic;
+using System.Linq;
+
+public class Country
+{
+    public int Population { get; set; }
+}
+
+public class CountryFilter
+{
+    public static IEnumerable<Country> FilterByPopulation(IEnumerable<Country> countries, int millions)
+    {
+        return countries.Where(c => c.Population < millions * 1000000);
+    }
+}
+You can then use this method like this:
+
+csharp
+Copy code
+IEnumerable<Country> countries = GetCountries(); // Assume this method returns your list of countries
+int filterValue = 10; // e.g., 10 million
+IEnumerable<Country> filteredCountries = CountryFilter.FilterByPopulation(countries, filterValue);
+
+foreach (var country in filteredCountries)
+{
+    Console.WriteLine($"Country with population: {country.Population}");
+}
+This will return only the countries with a population of less than 10 million.
